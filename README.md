@@ -1,6 +1,7 @@
 # cuit_test
 
-SCREENSHOOT
+Screenshoot
+
 ![Screenshot](/images/ss.png?raw=true "Screenshot")
 
-Don't forget to add references later!!
+Don't forget to add references later in the code!
