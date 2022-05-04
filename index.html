@@ -1,0 +1,135 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Cardiff University IT Test</title>
+    <link rel="stylesheet" type="text/css" href="assets/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/jquery.dataTables.min.css">
+    <script src="assets/jquery-3.5.1.js"></script>
+    <script src="assets/d3.v4.min.js"></script>
+    <script type="text/javascript" src="assets/datatables.min.js"></script>
+    <script type="text/javascript" src="assets/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#parent_event').DataTable( {
+                "ajax": {
+                    "url": "data/OpenDay2.json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { data: "id" },
+                    { data: "start_time" },
+                    { data: "end_time" },
+                    { data: "active" },
+                    { data: "cover_image" },
+                    { data: "type" },
+                    { data: "description" },
+                    { data: "topics" }
+                ]
+            } );
+            $('#topics').DataTable( {
+                "ajax": {
+                    "url": "data/OpenDay.json",
+                    "dataSrc": "topics"
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "cover_image" },
+                    { "data": "name" },
+                    { "data": "description" },
+                    { "data": "programs" }
+                ]
+            } );
+            $('#programs').DataTable( {
+                "ajax": {
+                    "url": "data/OpenDay.json",
+                    "dataSrc": "topics"
+                },
+                "deferRender": true,
+                "columns": [
+                    { "data": "programs[].id" },
+                    { "data": "programs[].open_day_id" },
+                    { "data": "programs[].location_id" },
+                    { "data": "programs[].school_id" },
+                    { "data": "programs[].topic_id" }
+                ]
+            } );
+            d3.json("data/OpenDay.json", function (d) {
+                console.log(d);
+            });
+        } );
+    </script>
+</head>
+
+<body>
+    <h1>Parent</h1>
+    <table id="parent_event" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>start_time</th>
+                <th>end_time</th>
+                <th>active</th>
+                <th>cover_image</th>
+                <th>type</th>
+                <th>description</th>
+                <th>topics</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>id</th>
+                <th>start_time</th>
+                <th>end_time</th>
+                <th>active.</th>
+                <th>cover_image</th>
+                <th>type</th>
+                <th>description</th>
+                <th>topics</th>
+            </tr>
+        </tfoot>
+    </table>
+    <h1>Topics</h1>
+    <table id="topics" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>cover_image</th>
+                <th>name</th>
+                <th>description</th>
+                <th>programs</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>id</th>
+                <th>cover_image</th>
+                <th>name</th>
+                <th>description</th>
+                <th>programs</th>
+            </tr>
+        </tfoot>
+    </table>
+    <h1>Programs</h1>
+    <table id="programs" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>open_day_id</th>
+                <th>location_id</th>
+                <th>school_id</th>
+                <th>topic_id</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>id</th>
+                <th>open_day_id</th>
+                <th>location_id</th>
+                <th>school_id</th>
+                <th>topic_id</th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
